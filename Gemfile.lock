@@ -121,14 +121,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  authlogic
-  capybara
-  factory_girl
+  authlogic (= 2.1.6)
+  capybara (= 0.4.0)
+  factory_girl (= 1.3.2)
   haml (= 3.0.22)
-  mocha
+  mocha (= 0.9.9)
   rails (= 3.0.1)
-  rcov
-  rspec
-  rspec-rails
-  ruby-debug
+  rcov (= 0.9.9)
+  rspec (= 2.0.1)
+  rspec-rails (= 2.0.1)
+  ruby-debug (= 0.10.3)
   sqlite3-ruby
