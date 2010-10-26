@@ -1,4 +1,7 @@
 Rudash::Application.routes.draw do
+  root :to => "entries#index"
+  resources :entries, :except => [:show,:destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

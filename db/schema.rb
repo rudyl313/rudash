@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025063158) do
+ActiveRecord::Schema.define(:version => 20101026053330) do
 
   create_table "entries", :force => true do |t|
     t.string   "content"
     t.date     "due_date"
     t.time     "due_time"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "completed_at"
   end
 
 end
