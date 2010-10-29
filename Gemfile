@@ -8,6 +8,7 @@ gem "authlogic", "2.1.6"
 group :development do
   gem "rspec-rails", "2.0.1"
   gem "ruby-debug", "0.10.3"
+  gem "rails3-generators"
 end
 
 group :test do

@@ -1,1 +1,2 @@
 export DISPLAY=:0
+alias r="script/rails"
