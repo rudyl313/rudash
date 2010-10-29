@@ -1,11 +1,21 @@
 class ApplicationController < ActionController::Base
   before_filter :require_user
+  before_filter :check_permission
 
   protect_from_forgery
 
   helper_method :current_user_session, :current_user
 
   private
+  def check_permission
+    if current_user
+      permission = self.class.to_s.underscore.split("_").first + "_permission"
+      if current_user.attributes.map{|k,v| k}.include?(permission)
+        redirect_to root_path unless current_user.attributes[permission]
+      end
+    end
+  end
+
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
       return @current_user_session if defined?(@current_user_session)

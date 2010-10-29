@@ -1,0 +1,21 @@
+%h1="New user"
+= form_for @user do |f|
+  - unless @user.errors.empty?
+    %div
+      %ul
+      - @user.errors.to_a.each do |error|
+        %li=error
+  - [:login, :email].each do |sym|
+    %div
+      = f.label sym
+      = f.text_field sym
+  - [:password, :password_confirmation].each do |sym|
+    %div
+      = f.label sym
+      = f.password_field sym
+  - @permissions.each do |permission|
+    %div
+      = f.label permission
+      = f.check_box permission, {}, "yes", nil
+  %div
+    = f.submit "Create"
