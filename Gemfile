@@ -13,6 +13,7 @@ end
 
 group :test do
   gem "capybara", "0.4.0"
+  gem "launchy"
   gem "rspec-rails", "2.0.1"
   gem "rcov", "0.9.9"
   gem "rspec", "2.0.1"

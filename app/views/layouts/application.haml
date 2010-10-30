@@ -11,5 +11,6 @@
           = link_to "Logout", logout_path
           = link_to "Users", users_path if current_user.users_permission
           = link_to "Todo", user_entries_path(current_user)
+          %div#flash= flash[:notice]
       %div#main
       = yield
