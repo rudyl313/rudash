@@ -15,6 +15,6 @@
       %td=user.email
       - @permissions.each do |permission|
         %td=user.attributes[permission]
-      %td=link_to "Edit user", edit_user_path(user)
-      %td=link_to "Destroy user",user, :method => :delete
+      %td= link_to "Edit user", edit_user_path(user)
+      %td= link_to "Destroy user",user, :method => :delete, :id => "destroy_user_#{user.id}"
 = link_to "New user", new_user_path

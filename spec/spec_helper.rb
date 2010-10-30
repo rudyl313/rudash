@@ -40,4 +40,20 @@ module TestHelper
     len.times { str << "a" }
     str
   end
+
+  def login_admin
+    @admin = User.create!(:login => "admin", :email => "admin@email.com", :password => "adminpass",
+                         :password_confirmation => "adminpass", :users_permission => "yes")
+    visit "/"
+    fill_in "user_session[login]", :with => @admin.login
+    fill_in "user_session[password]", :with => "adminpass"
+    click_button "Login"
+  end
+
+  def login_user(user,pass)
+    visit "/"
+    fill_in "user_session[login]", :with => user.login
+    fill_in "user_session[password]", :with => pass
+    click_button "Login"
+  end
 end
