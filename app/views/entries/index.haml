@@ -2,4 +2,11 @@
 - @dates.each do |date|
   .date_container
     %h3= date_label(date)
+  - Entry.where("due_date = ?",date).order("order_time").each do |entry|
+    .entry
+      %span.entry_time= entry.due_time ? entry.due_time : ""
+      %span.entry_content= entry.content
+      %span.entry_controls= ""
+
+
 

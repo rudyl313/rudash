@@ -8,7 +8,8 @@ describe Entry do
       @valid_attributes = {
         :content => "Do the laundry",
         :due_date => Date.today,
-        :due_time => Time.now
+        :due_time => Time.now,
+        :order_time => Time.now
       }
     end
 
