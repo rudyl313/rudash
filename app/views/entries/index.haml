@@ -1,5 +1,14 @@
+- content_for :head do
+  = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+
+:javascript
+  $(function(){
+    $("#page").hide();
+    $("#page").slideDown('slow');
+  });
+
 %h1="To Do List"
 - @dates.each do |date|
-  %div#date_container
+  .date_container
     %h3= date_label(date)
 

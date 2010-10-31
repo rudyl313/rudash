@@ -1,3 +1,42 @@
+body {
+    font-family: 'Lucida Grande', verdana, arial, helvetica, sans-serif;
+    font-color: #000;
+    background-color: #DDE;
+    background-image:url('../images/back01.png');
+}
+
+#page {
+    position: absolute;
+    border-style: solid;
+    border-color: #FFF;
+    border-width: 1px;
+    width: 1000px;
+    left: 100px;
+    top: 10px;
+    padding: 20px 20px 20px 20px;
+    background-color: #FFF;
+    /*-moz-box-shadow: 6px 6px 6px #666;
+    -webkit-box-shadow: 6px 6px 6px #666;
+    box-shadow: 6px 6px 6px #666; */
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.date_container {
+    position: relative;
+    height: 25px;
+    background-color: #BECC75;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 0px 0px 0px 10px;
+    /*background-image:-webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(64,64,64,0.75)), to(rgba(192,192,192,0.9)));
+    background-image:-moz-linear-gradient(top,bottom,from(rgba(64,64,64,0.75)), to(rgba(192,192,192,0.9)));
+    -khtml-box-shadow:rgba(192,192,192,0.75) 0px 8px 24px;
+    -moz-box-shadow:rgba(192,192,192,0.75) 0px 8px 24px;
+    box-shadow:rgba(192,192,192,0.75) 0px 8px 24px; */
+}
+
 #flash {
     color: green;
 }
+
