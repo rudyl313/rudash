@@ -34,9 +34,9 @@ body {
     -khtml-box-shadow:rgba(192,192,192,0.75) 0px 8px 24px;
     -moz-box-shadow:rgba(192,192,192,0.75) 0px 8px 24px;
     box-shadow:rgba(192,192,192,0.75) 0px 8px 24px; */
-    -moz-box-shadow: 6px 6px 6px #666;
+    /*-moz-box-shadow: 6px 6px 6px #666;
     -webkit-box-shadow: 6px 6px 6px #666;
-    box-shadow: 6px 6px 6px #666;
+    box-shadow: 6px 6px 6px #666; */
 }
 
 #flash {
