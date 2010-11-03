@@ -1,18 +1,55 @@
 :javascript
+  (function($) {
+    $(function(){
+      $(".add_entry").click(function(){
+        $(this).hide();
+        var $current_entry_controls = $("#add_entry_controls").parent().parent();
+        if ($current_entry_controls.hasClass("entry_controls")) {
+          $(".add_entry",$current_entry_controls).show();
+        }
+        $(".add_entry_controls_container",$(this).parent()).append($("#add_entry_controls"));
+        $("#add_entry_controls").show();
+      });
+      $("#submit_new_entry").click(function(e){
+        e.preventDefault();
+        var time = $("#entry_time_field").val();
+        var content = $("#entry_content_field").val();
+        var date = $(this).parent().parent().parent().attr("data-date");
+        var ajax_data = {
+          entry : {
+            due_time : time,
+            due_date : date,
+            content : content
+          }
+        };
+        $.ajax({
+          url : new_entry_path,
+          type : 'GET',
+          dataType : 'json',
+          data : ajax_data,
+          success : function(data,x,y){ alert("yup"); }
+        });
+      });
+    });
+  })(jQuery);
 
+%script
+  ="var new_entry_path = '#{new_user_entry_path(current_user)}.json'"
 
 %h1="To Do List"
+%div#add_entry_controls{:style => "display:none;"}
+  = "Time"
+  = text_field_tag("entry_time_field")
+  = "Content"
+  = text_field_tag("entry_content_field")
+  = submit_tag("Add", :id => "submit_new_entry")
 - @dates.each do |date|
-  - datestr = date.strftime("%m_%d_%Y")
+  - datestr = date.strftime("%d-%m-%Y")
   .date_container
     %h3= date_label(date)
-  .add_entry{:id => "add_entry_#{datestr}"}= "add"
-  .add_entry_controls{:id => "add_entry_#{datestr}"}
-    %div= "Time"
-    %div= text_field_tag("time_field_#{datestr}")
-    %div= "Content"
-    %div= text_field_tag("content_field_#{datestr}")
-    %div= submit_tag("Add")
+  .entry_controls{:"data-date" => datestr}
+    .add_entry= "add"
+    .add_entry_controls_container{:"data-date" => datestr}
   - Entry.where("due_date = ?",date).order("order_time").each do |entry|
     .entry
       %span.entry_time= entry.due_time ? entry.due_time : ""
