@@ -5,26 +5,30 @@
         $("#add_entry_controls").hide();
         $(".entry_controls",$(this).parent()).append($("#add_entry_controls"));
         $("#add_entry_controls").show();
-      });
-      $("#submit_new_entry").click(function(e){
-        e.preventDefault();
-        var time = $("#entry_time_field").val();
-        var content = $("#entry_content_field").val();
-        var date = $(this).parent().parent().parent().attr("data-date");
-        var ajax_data = {
-          entry : {
-            due_time : time,
-            due_date : date,
-            content : content
-          }
-        };
-        $.ajax({
-          url : create_entry_path,
-          type : 'POST',
-          data : ajax_data,
-          success : function(data,x,y){
-             alert(data);
-          }
+        $("#submit_new_entry").click(function(e){
+          var $group = $(this).parent().parent().parent();
+          e.preventDefault();
+          var time = $("#entry_time_field").val();
+          var content = $("#entry_content_field").val();
+          var date = $group.attr("data-date");
+          var ajax_data = {
+            entry : {
+              due_time : time,
+              due_date : date,
+              content : content
+            }
+          };
+          $.ajax({
+            url : create_entry_path,
+            type : 'POST',
+            data : ajax_data,
+            success : function(data,x,y){
+              $("#add_entry_controls").slideUp();
+              $(".entry_list",$group).slideUp();
+              $(".entry_list",$group).html(data);
+              $(".entry_list",$group).slideDown();
+            }
+          });
         });
       });
     });
