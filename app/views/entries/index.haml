@@ -2,12 +2,6 @@
   = javascript_include_tag "entries"
 
 %h1="To Do List"
-%div#add_entry_controls{:style => "display:none;"}
-  = "Time"
-  = text_field_tag("entry_time_field")
-  = "Content"
-  = text_field_tag("entry_content_field")
-  = submit_tag("Add", :id => "submit_new_entry", :"data-path" => user_entries_path(current_user) )
 - @dates.each do |date|
   - datestr = date.strftime("%d-%m-%Y")
   .date_group{:"data-date" => datestr}
@@ -16,6 +10,13 @@
     .entry_controls
     .entry_list
       = render :partial => "entry_list", :locals => {:date => date}
+
+%div#add_entry_controls{:style => "display:none;"}
+  = "Time"
+  = text_field_tag("entry_time_field")
+  = "Content"
+  = text_field_tag("entry_content_field")
+  = submit_tag("Add", :id => "submit_new_entry", :"data-path" => user_entries_path(current_user) )
 
 
 
