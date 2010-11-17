@@ -2,22 +2,25 @@ class EntriesController < ApplicationController
   before_filter :only_view_own_entries
 
   respond_to :html, :json
+  layout "empty", :only => [:show]
+  layout "application", :except => [:show]
 
   def index
     @dates = ((Date.today)..(Date.today + 10.days)).to_a
   end
 
   def new
-    user = User.find(params[:user_id])
-    entry = user.entries.build(params[:entry])
-    if entry.save
-      respond_with entry
-    else
-      respond_with entry.errors.to_a
-    end
+  end
+
+  def show
+    @entry = Entry.find(params[:id])
   end
 
   def create
+    user = User.find(params[:user_id])
+    @entry = user.entries.build(params[:entry])
+    @entry.save
+    respond_with(user,@entry)
   end
 
   def edit

@@ -5,7 +5,7 @@ Rudash::Application.routes.draw do
 
   root :to => 'entries#index'
   resources :users, :except => [:show] do
-    resources :entries, :except => [:destroy, :show]
+    resources :entries, :except => [:destroy]
   end
 
   # The priority is based upon order of creation:

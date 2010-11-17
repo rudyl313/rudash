@@ -1,13 +1,9 @@
 :javascript
   (function($) {
     $(function(){
-      $(".add_entry").click(function(){
-        $(this).hide();
-        var $current_entry_controls = $("#add_entry_controls").parent().parent();
-        if ($current_entry_controls.hasClass("entry_controls")) {
-          $(".add_entry",$current_entry_controls).show();
-        }
-        $(".add_entry_controls_container",$(this).parent()).append($("#add_entry_controls"));
+      $(".date_container").click(function(){
+        $("#add_entry_controls").hide();
+        $(".entry_controls",$(this).parent()).append($("#add_entry_controls"));
         $("#add_entry_controls").show();
       });
       $("#submit_new_entry").click(function(e){
@@ -23,18 +19,19 @@
           }
         };
         $.ajax({
-          url : new_entry_path,
-          type : 'GET',
-          dataType : 'json',
+          url : create_entry_path,
+          type : 'POST',
           data : ajax_data,
-          success : function(data,x,y){ alert("yup"); }
+          success : function(data,x,y){
+             alert(data);
+          }
         });
       });
     });
   })(jQuery);
 
 %script
-  ="var new_entry_path = '#{new_user_entry_path(current_user)}.json'"
+  ="var create_entry_path = '#{user_entries_path(current_user)}'"
 
 %h1="To Do List"
 %div#add_entry_controls{:style => "display:none;"}
@@ -45,16 +42,12 @@
   = submit_tag("Add", :id => "submit_new_entry")
 - @dates.each do |date|
   - datestr = date.strftime("%d-%m-%Y")
-  .date_container
-    %h3= date_label(date)
-  .entry_controls{:"data-date" => datestr}
-    .add_entry= "add"
-    .add_entry_controls_container{:"data-date" => datestr}
-  - Entry.where("due_date = ?",date).order("order_time").each do |entry|
-    .entry
-      %span.entry_time= entry.due_time ? entry.due_time : ""
-      %span.entry_content= entry.content
-      %span.entry_controls= ""
+  .date_group{:"data-date" => datestr}
+    .date_container
+      %h3= date_label(date)
+    .entry_controls
+    .entry_list
+      = render :partial => "entry_list", :locals => {:date => date}
 
 
 
