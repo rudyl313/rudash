@@ -1,6 +1,7 @@
 (function($) {
   $(function(){
     $(".date_container").click(function(){
+      // Figure out how to properly move a div
       $("#add_entry_controls").hide();
       $(".entry_controls",$(this).parent()).append($("#add_entry_controls"));
       $("#add_entry_controls").show();
