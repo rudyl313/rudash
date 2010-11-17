@@ -39,3 +39,7 @@ body {
 #entry_content_field {
     width: 300px;
 }
+
+.entry_time {
+    width: 80px;
+}

@@ -1,4 +1,3 @@
-.entry
-  %span.entry_time= entry.due_time ? entry.due_time.strftime("%I:%M%p") : " "
-  %span.entry_content= entry.content
-  %span.entry_controls= ""
+%td.entry_time= entry.due_time ? entry.due_time.strftime("%I:%M%p") : " "
+%td.entry_content= entry.content
+%td.entry_controls= ""

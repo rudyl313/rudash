@@ -1,2 +1,4 @@
-- Entry.where("due_date = ?",date).order("order_time").each do |entry|
-  = render :partial => "entry", :locals => {:entry => entry}
+%table
+  - Entry.where("due_date = ?",date).order("order_time").each do |entry|
+    %tr
+      = render :partial => "entry", :locals => {:entry => entry}
