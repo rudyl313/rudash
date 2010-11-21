@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: apache2
-# Recipe:: python 
+# Cookbook Name:: postgresql
+# Recipe:: default
 #
-# Copyright 2008-2009, Opscode, Inc.
+# Copyright 2009, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-case node[:platform]
-  when "debian", "ubuntu"
-    package "libapache2-mod-python" do
-      action :install
-    end
-  when "centos", "redhat", "fedora"
-    package "mod_python" do
-      action :install
-      notifies :run, resources(:execute => "generate-module-list"), :immediately
-    end
-end
-
-apache_module "python"

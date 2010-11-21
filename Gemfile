@@ -1,8 +1,8 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.1"
+gem "rails", "3.0.3"
 gem "haml", "3.0.22"
-gem "sqlite3-ruby", :require => "sqlite3"
+gem "pg"
 gem "authlogic", "2.1.6"
 
 group :development do

@@ -18,15 +18,10 @@
 #
 
 case node[:platform]
-  when "debian", "ubuntu"
-    package "libapache2-mod-python" do
-      action :install
-    end
-  when "centos", "redhat", "fedora"
-    package "mod_python" do
-      action :install
-      notifies :run, resources(:execute => "generate-module-list"), :immediately
-    end
+when "debian","ubuntu"
+  package "libapache2-mod-wsgi"
+when "redhat","centos","fedora"
+  package "mod_wsgi"
 end
 
-apache_module "python"
+apache_module "wsgi"

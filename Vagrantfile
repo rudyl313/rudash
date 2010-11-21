@@ -18,5 +18,5 @@ Vagrant::Config.run do |config|
   # Configure to provision with local cookbooks
   config.vm.provisioner = :chef_solo
   config.chef.run_list = ["recipe[rudash]"]
-  config.chef.json.merge!({:mysql => { :server_root_password => "root"}})
+  config.chef.json.merge!({:pg => { :user => "rudash", :databases => ["rudash_development"]}})
 end

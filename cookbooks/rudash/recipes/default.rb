@@ -5,6 +5,7 @@ require_recipe "apt"
 require_recipe "build-essential"
 require_recipe "apache2"
 require_recipe "passenger_apache2::mod_rails"
+require_recipe "postgresql::rails"
 
 #--------------------------------------------------------------------------------
 # Packages
@@ -17,8 +18,6 @@ package "xmonad"
 package "firefox"
 package "flashplugin-nonfree"
 package "zip"
-package "sqlite3"
-package "libsqlite3-dev"
 
 #--------------------------------------------------------------------------------
 # Gems
@@ -94,9 +93,6 @@ bash "db-bootstrap" do
 
   code <<-CODE
 rake db:migrate
-rake db:fixtures:load
 rake db:test:prepare
 CODE
-
-  only_if "cd /vagrant && rake db:version | grep ' 0$'"
 end
