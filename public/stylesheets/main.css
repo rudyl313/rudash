@@ -1,8 +1,8 @@
 body {
     font-family: 'Lucida Grande', verdana, arial, helvetica, sans-serif;
     font-color: #000;
-    background-color: #DDE;
-    background-image:url('../images/back01.png');
+    background-color: #6792AB;
+    /*background-image:url('../images/back05.png');*/
 }
 
 #page {
@@ -22,7 +22,7 @@ body {
 .date_container {
     position: relative;
     height: 25px;
-    background-color: #BECC75;
+    background-color: #B8D0DE;
     -moz-border-radius: 15px;
     border-radius: 15px;
     padding: 0px 0px 0px 10px;
@@ -32,11 +32,11 @@ body {
     color: green;
 }
 
-#entry_time_field {
+input.time_field {
     width: 50px;
 }
 
-#entry_content_field {
+input.content_field {
     width: 300px;
 }
 

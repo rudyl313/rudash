@@ -9,9 +9,9 @@
       %h3= date_label(date)
     .entry_controls{:style => "display:none;"}
       = "Time"
-      = text_field_tag("time_field_#{datestr}")
+      = text_field_tag("time_field_#{datestr}",nil,:class => "time_field")
       = "Content"
-      = text_field_tag("content_field_#{datestr}")
+      = text_field_tag("content_field_#{datestr}",nil,:class => "content_field")
       = submit_tag("Add", :class => "submit_new_entry",
         :"data-path" => user_entries_path(current_user))
     .entry_list
