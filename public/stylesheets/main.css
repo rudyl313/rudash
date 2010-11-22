@@ -1,8 +1,8 @@
 body {
     font-family: 'Lucida Grande', verdana, arial, helvetica, sans-serif;
     font-color: #000;
-    background-color: #6792AB;
-    /*background-image:url('../images/back05.png');*/
+    background-color: #F0F0F0;
+    /*background-image:url('../images/back06.png');*/
 }
 
 #page {
@@ -17,12 +17,15 @@ body {
     background-color: #FFF;
     -moz-border-radius: 15px;
     border-radius: 15px;
+    -moz-box-shadow: 3px 3px 4px #777;
+    -webkit-box-shadow: 3px 3px 4px #777;
+    box-shadow: 3px 3px 4px #777;
 }
 
 .date_container {
     position: relative;
     height: 25px;
-    background-color: #B8D0DE;
+    background-color: #DBE6EC;
     -moz-border-radius: 15px;
     border-radius: 15px;
     padding: 0px 0px 0px 10px;
@@ -43,3 +46,7 @@ input.content_field {
 .entry_time {
     width: 80px;
 }
+.entry_content {
+    width: 800px;
+}
+
