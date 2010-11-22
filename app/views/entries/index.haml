@@ -7,17 +7,12 @@
   .date_group{:"data-date" => datestr}
     .date_container
       %h3= date_label(date)
-    .entry_controls
+    .entry_controls{:style => "display:none;"}
+      = "Time"
+      = text_field_tag("time_field_#{datestr}")
+      = "Content"
+      = text_field_tag("content_field_#{datestr}")
+      = submit_tag("Add", :class => "submit_new_entry",
+        :"data-path" => user_entries_path(current_user))
     .entry_list
       = render :partial => "entry_list", :locals => {:date => date}
-
-.entry_controls_container
-  %div#add_entry_controls{:style => "display:none;"}
-    = "Time"
-    = text_field_tag("entry_time_field")
-    = "Content"
-    = text_field_tag("entry_content_field")
-    = submit_tag("Add", :id => "submit_new_entry", :"data-path" => user_entries_path(current_user) )
-
-
-
