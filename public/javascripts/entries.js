@@ -1,6 +1,18 @@
 (function($) {
   $(function(){
 
+    var draggable_options = {
+      revert: 'invalid',
+      refreshPositions: true,
+      zIndex: 10000,
+      start : function(e,ui){
+        $(this).css("color", "#FFB300");
+      },
+      stop : function(e,ui){
+        $(this).css("color","black");
+      }
+    };
+
     $(".date_container").click(function(){
       $(".entry_controls").slideUp();
       $(".entry_controls",$(this).parent()).slideDown();
@@ -24,6 +36,7 @@
           $(".entry_controls").slideUp();
           $(".entry_list",$group).slideUp();
           $(".entry_list",$group).html(data);
+          $(".entry",$group).draggable(draggable_options);
           $(".entry_list",$group).slideDown();
           $("#time_field_" + datestr).val("");
           $("#content_field_" + datestr).val("");
@@ -31,11 +44,7 @@
       });
     });
 
-    $(".entry").draggable({
-      revert: 'invalid',
-      refreshPositions: true,
-      zIndex: 10000
-    });
+    $(".entry").draggable(draggable_options);
 
     $(".date_group").droppable({
       drop : function(e,ui){
@@ -58,11 +67,7 @@
           success : function(data,x,y){
             $dropped_group.html(data);
             $dropped_group.slideDown();
-            $(".entry",$dropped_group).draggable({
-              revert: 'invalid',
-              refreshPositions: true,
-              zIndex: 10000
-            });
+            $(".entry",$dropped_group).draggable(draggable_options);
             $dragged_item.remove();
             $(".entry_list",$dragged_group).slideDown();
           }
