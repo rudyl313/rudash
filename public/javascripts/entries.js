@@ -31,7 +31,21 @@
       });
     });
 
-    $(".entry").draggable();
+    $(".entry").draggable({
+      //revert: 'invalid',
+      revert : true,
+      refreshPositions: true
+      //helper : 'clone',
+    });
+
+    $(".date_group").droppable({
+      drop : function(e,ui){
+        var dropped_date = $(this).attr("data-date");
+        var dragged_date = $(ui.draggable).parent().parent().attr("data-date");
+        var dragged_id = $(ui.draggable).attr("data-id");
+        alert("Dragged " + dragged_id + " from " + dragged_date + " to " + dropped_date);
+      }
+    });
 
   });
 })(jQuery);
