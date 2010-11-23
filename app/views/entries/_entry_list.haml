@@ -1,3 +1,4 @@
 - Entry.where("due_date = ?",date).order("order_time").each do |entry|
-  .entry{:"data-id" => entry.id}
+  .entry{:"data-id" => entry.id,
+    :"data-update-path" => user_entry_path(current_user,entry)}
     = render :partial => "entry", :locals => {:entry => entry}

@@ -28,6 +28,10 @@ class EntriesController < ApplicationController
   end
 
   def update
+    user = User.find(params[:user_id])
+    @entry = Entry.find(params[:id])
+    @entry.update_attributes(params[:entry])
+    respond_with(user,@entry)
   end
 
   private
