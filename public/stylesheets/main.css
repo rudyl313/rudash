@@ -43,10 +43,18 @@ input.content_field {
     width: 300px;
 }
 
+.entry {
+    width: 900px;
+    height: 18px;
+    margin: 2px 2px 2px 2px;
+}
+
 .entry_time {
     width: 80px;
+    float: left;
 }
 .entry_content {
     width: 800px;
+    float: right;
 }
 
