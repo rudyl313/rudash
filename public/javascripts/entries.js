@@ -31,5 +31,7 @@
       });
     });
 
+    $(".entry").draggable();
+
   });
 })(jQuery);
