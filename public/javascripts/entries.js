@@ -33,7 +33,8 @@
 
     $(".entry").draggable({
       revert: 'invalid',
-      refreshPositions: true
+      refreshPositions: true,
+      zIndex: 10000
     });
 
     $(".date_group").droppable({
@@ -59,7 +60,8 @@
             $dropped_group.slideDown();
             $(".entry",$dropped_group).draggable({
               revert: 'invalid',
-              refreshPositions: true
+              refreshPositions: true,
+              zIndex: 10000
             });
             $dragged_item.remove();
             $(".entry_list",$dragged_group).slideDown();
