@@ -43,6 +43,8 @@
         var dropped_date = $(this).attr("data-date");
         var dragged_date = $(ui.draggable).parent().parent().attr("data-date");
         var dragged_id = $(ui.draggable).attr("data-id");
+        $(".entry_list",$(this)).slideUp();
+        $(".entry_list",$("[data-date='" + dragged_date  + "']")).slideUp();
         $.ajax({
           url : $(ui.draggable).attr("data-update-path"),
           type : 'PUT',
