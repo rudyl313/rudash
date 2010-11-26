@@ -16,4 +16,4 @@
       = submit_tag("Add", :class => "submit_new_entry",
         :"data-path" => user_entries_path(current_user))
     .entry_list
-      = render :partial => "entry_list", :locals => {:date => date}
+      = render :partial => "entry_list", :locals => {:date => date,:user => @user}

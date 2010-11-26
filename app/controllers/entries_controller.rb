@@ -7,6 +7,7 @@ class EntriesController < ApplicationController
   layout "application", :except => [:show]
 
   def index
+    @user = User.find(params[:user_id])
     @dates = ((Date.today)..(Date.today + 10.days)).to_a
   end
 
@@ -14,6 +15,7 @@ class EntriesController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
     @entry = Entry.find(params[:id])
   end
 
