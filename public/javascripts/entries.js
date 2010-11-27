@@ -84,6 +84,10 @@
       });
     });
 
+    $(".entry_button").click(function(){
+      alert("yoyoy");
+    });
+
     $(".entry").draggable(draggable_options);
     $(".entry").droppable(droppable_options);
     $(".date_container").droppable(droppable_options);
