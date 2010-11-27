@@ -54,7 +54,11 @@ input.content_field {
     float: left;
 }
 .entry_content {
-    width: 800px;
+    width: 750px;
+    float: left;
+}
+.entry_button {
+    width: 50px;
     float: right;
 }
 
