@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   before_filter :only_view_own_entries
   before_filter :handle_order_time, :only => [:create]
+  before_filter :insert_in_right_position, :only => [:update]
 
   respond_to :html, :json
   layout "empty", :only => [:show]
@@ -46,6 +47,14 @@ class EntriesController < ApplicationController
       params[:entry][:order_time] = Entry.generate_order_time
     else
       params[:entry][:order_time] = params[:entry][:due_time]
+    end
+  end
+
+  def insert_in_right_position
+    if params[:after]
+      params[:entry][:order_time] = Entry.order_time_to_be_after(params[:after],
+                                                                 params[:id],
+                                                                 params[:entry][:due_date])
     end
   end
 end

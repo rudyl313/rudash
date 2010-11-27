@@ -13,6 +13,45 @@
       }
     };
 
+    var droppable_options = {
+      drop : function(e,ui) {
+        if ($(this).hasClass("entry")) {
+          var $dropped_group = $(this).parent().parent();
+          var after_target = $(this).attr("data-id");
+        } else {
+          var $dropped_group = $(this).parent();
+          var after_target = "first";
+        }
+        var $dragged_item = $(ui.draggable);
+        var $dragged_group = $dragged_item.parent().parent();
+        var dragged_date = $dragged_group.attr("data-date");
+        var dragged_id = $dragged_item.attr("data-id");
+        var $dropped_list = $(".entry_list",$dropped_group);
+        var $dragged_list = $(".entry_list",$("[data-date='" + dragged_date  + "']"));
+        var dropped_date = $dropped_group.attr("data-date");
+        $dropped_list.slideUp();
+        $dragged_list.slideUp();
+        $.ajax({
+          url : $dragged_item.attr("data-update-path"),
+          type : 'PUT',
+          data : {
+            after : after_target,
+            entry : {
+              due_date : dropped_date
+            }
+          },
+          success : function(data,x,y){
+            $dropped_list.html(data);
+            $dropped_list.slideDown();
+            $(".entry",$dropped_list).draggable(draggable_options);
+            $(".entry",$dropped_list).droppable(droppable_options);
+            $dragged_item.remove();
+            $dragged_list.slideDown();
+          }
+        });
+      }
+    };
+
     $(".date_container").click(function(){
       $(".entry_controls").slideUp();
       $(".entry_controls",$(this).parent()).slideDown();
@@ -37,6 +76,7 @@
           $(".entry_list",$group).slideUp();
           $(".entry_list",$group).html(data);
           $(".entry",$group).draggable(draggable_options);
+          $(".entry",$group).droppable(droppable_options);
           $(".entry_list",$group).slideDown();
           $("#time_field_" + datestr).val("");
           $("#content_field_" + datestr).val("");
@@ -45,35 +85,8 @@
     });
 
     $(".entry").draggable(draggable_options);
-
-    $(".date_group").droppable({
-      drop : function(e,ui){
-        var dropped_date = $(this).attr("data-date");
-        var $dragged_item = $(ui.draggable);
-        var $dragged_group = $dragged_item.parent().parent();
-        var dragged_date = $dragged_group.attr("data-date");
-        var dragged_id = $dragged_item.attr("data-id");
-        var $dropped_group = $(".entry_list",$(this));
-        $dropped_group.slideUp();
-        $(".entry_list",$("[data-date='" + dragged_date  + "']")).slideUp();
-        $.ajax({
-          url : $(ui.draggable).attr("data-update-path"),
-          type : 'PUT',
-          data : {
-            entry : {
-              due_date : dropped_date
-            }
-          },
-          success : function(data,x,y){
-            $dropped_group.html(data);
-            $dropped_group.slideDown();
-            $(".entry",$dropped_group).draggable(draggable_options);
-            $dragged_item.remove();
-            $(".entry_list",$dragged_group).slideDown();
-          }
-        });
-      }
-    });
+    $(".entry").droppable(droppable_options);
+    $(".date_container").droppable(droppable_options);
 
   });
 })(jQuery);
