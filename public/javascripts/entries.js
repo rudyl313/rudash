@@ -27,7 +27,8 @@
         var dragged_date = $dragged_group.attr("data-date");
         var dragged_id = $dragged_item.attr("data-id");
         var $dropped_list = $(".entry_list",$dropped_group);
-        var $dragged_list = $(".entry_list",$("[data-date='" + dragged_date  + "']"));
+        var $dragged_list = $(".entry_list",$("[data-date='" +
+                                              dragged_date  + "']"));
         var dropped_date = $dropped_group.attr("data-date");
         $dropped_list.slideUp();
         $dragged_list.slideUp();
@@ -85,7 +86,20 @@
     });
 
     $(".entry_button").click(function(){
-      alert("yoyoy");
+      var entry = $(this).parent();
+      var update_path = entry.attr("data-update-path");
+      $.ajax({
+          url : update_path,
+          type : 'PUT',
+          data : {
+            entry : {
+              completed_at : "now"
+            }
+          },
+          success : function(data,x,y){
+            entry.remove();
+          }
+        });
     });
 
     $(".entry").draggable(draggable_options);

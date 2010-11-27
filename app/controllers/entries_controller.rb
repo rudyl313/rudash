@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
   before_filter :only_view_own_entries
   before_filter :handle_order_time, :only => [:create]
   before_filter :insert_in_right_position, :only => [:update]
+  before_filter :replace_completed_at, :only => [:update]
 
   respond_to :html, :json
   layout "empty", :only => [:show]
@@ -55,6 +56,12 @@ class EntriesController < ApplicationController
       params[:entry][:order_time] = Entry.order_time_to_be_after(params[:after],
                                                                  params[:id],
                                                                  params[:entry][:due_date])
+    end
+  end
+
+  def replace_completed_at
+    if params[:entry][:completed_at] == "now"
+      params[:entry][:completed_at] = Time.now
     end
   end
 end
