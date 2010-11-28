@@ -1,12 +1,11 @@
 class RecurringEntry < ActiveRecord::Base
   belongs_to :user
-  has_many :entries
+  has_many :entries, :dependent => :destroy
 
-  validates :period,:presence => true, :inclusion =>
-    { :in => %w{daily weekly monthly yearly} }
-  validates :wday, :presence => false, :numericality => true
-  validates :mday, :presence => false, :numericality => true
-  validates :month, :presence => false, :numericality => true
+  #validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
+  #validates :wday, :presence => false, :numericality => true
+  #validates :mday, :presence => false, :numericality => true
+  #validates :month, :presence => false, :numericality => true
   validates :content, :presence => true, :length =>
     {:minimum => 1, :maximum => 1000}
 
@@ -15,7 +14,7 @@ class RecurringEntry < ActiveRecord::Base
     where(:period => "weekly", :wday => dates.map(&:wday).uniq.sort!)
   }
   scope :monthly, lambda {|dates|
-    where(:period => "weekly", :mday => dates.map(&:mday).uniq.sort!)
+    where(:period => "monthly", :mday => dates.map(&:mday).uniq.sort!)
   }
   scope :yearly, lambda {|dates|
     where(:period => "yearly", :due_date => dates)
@@ -45,7 +44,7 @@ class RecurringEntry < ActiveRecord::Base
     end
 
     self.yearly(dates).for_user(user).each do |rentry|
-      dates.select{|d| rentry.due_date = d}.each do |date|
+      dates.select{|d| rentry.due_date == d}.each do |date|
         update_entry(rentry,date)
       end
     end
