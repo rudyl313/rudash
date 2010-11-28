@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128225611) do
+ActiveRecord::Schema.define(:version => 20101128234004) do
 
   create_table "entries", :force => true do |t|
     t.string   "content"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20101128225611) do
     t.string   "period"
     t.integer  "wday"
     t.integer  "mday"
-    t.integer  "month"
     t.time     "due_time"
     t.string   "content"
     t.integer  "user_id"
