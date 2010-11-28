@@ -17,6 +17,7 @@ class EntriesController < ApplicationController
     Entry.where("due_date < ?",start_date).destroy_all
     num_days = params[:num_days] ? params[:num_days].to_i : DAYS_INCREMENT
     @dates = ((start_date)..(start_date + num_days.days)).to_a
+    RecurringEntry.generate_entries(@dates,@user)
     @more_days = num_days + DAYS_INCREMENT
   end
 
