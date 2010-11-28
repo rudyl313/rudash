@@ -14,6 +14,9 @@
       = "Content"
       = text_field_tag("content_field_#{datestr}",nil,:class => "content_field")
       = submit_tag("Add", :class => "submit_new_entry",
-        :"data-path" => user_entries_path(current_user))
+        :"data-path" => user_entries_path(@user))
     .entry_list
       = render :partial => "entry_list", :locals => {:date => date,:user => @user}
+%br/
+.more_button{:"data-link" => user_entries_path(@user,:num_days => @more_days)}
+  = "More"

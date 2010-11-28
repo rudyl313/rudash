@@ -104,6 +104,11 @@
       });
     });
 
+    $(".more_button").click(function(){
+      $("#page").slideUp();
+      window.location = $(this).attr("data-link");
+    });
+
     $(".entry_button").click(complete_task);
     $(".entry").draggable(draggable_options);
     $(".entry").droppable(droppable_options);

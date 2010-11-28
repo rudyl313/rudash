@@ -1,4 +1,6 @@
 class EntriesController < ApplicationController
+  DAYS_INCREMENT = 14
+
   before_filter :only_view_own_entries
   before_filter :handle_order_time, :only => [:create]
   before_filter :insert_in_right_position, :only => [:update]
@@ -13,7 +15,9 @@ class EntriesController < ApplicationController
     old_entry = Entry.where("completed_at IS NULL").order(:due_date).first
     start_date = old_entry ? [Date.today,old_entry.due_date].min : Date.today
     Entry.where("due_date < ?",start_date).destroy_all
-    @dates = ((start_date)..(start_date + 14.days)).to_a
+    num_days = params[:num_days] ? params[:num_days].to_i : DAYS_INCREMENT
+    @dates = ((start_date)..(start_date + num_days.days)).to_a
+    @more_days = num_days + DAYS_INCREMENT
   end
 
   def new
