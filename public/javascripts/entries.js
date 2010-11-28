@@ -1,6 +1,23 @@
 (function($) {
   $(function(){
 
+    function complete_task(){
+      var entry = $(this).parent();
+      var update_path = entry.attr("data-update-path");
+      $.ajax({
+        url : update_path,
+        type : 'PUT',
+        data : {
+          entry : {
+            completed_at : "now"
+          }
+        },
+        success : function(data,x,y){
+          entry.remove();
+        }
+      });
+    }
+
     var draggable_options = {
       revert: 'invalid',
       refreshPositions: true,
@@ -46,6 +63,7 @@
             $dropped_list.slideDown();
             $(".entry",$dropped_list).draggable(draggable_options);
             $(".entry",$dropped_list).droppable(droppable_options);
+            $(".entry_button",$dropped_list).click(complete_task);
             $dragged_item.remove();
             $dragged_list.slideDown();
           }
@@ -78,6 +96,7 @@
           $(".entry_list",$group).html(data);
           $(".entry",$group).draggable(draggable_options);
           $(".entry",$group).droppable(droppable_options);
+          $(".entry_button",$group).click(complete_task);
           $(".entry_list",$group).slideDown();
           $("#time_field_" + datestr).val("");
           $("#content_field_" + datestr).val("");
@@ -85,23 +104,7 @@
       });
     });
 
-    $(".entry_button").click(function(){
-      var entry = $(this).parent();
-      var update_path = entry.attr("data-update-path");
-      $.ajax({
-          url : update_path,
-          type : 'PUT',
-          data : {
-            entry : {
-              completed_at : "now"
-            }
-          },
-          success : function(data,x,y){
-            entry.remove();
-          }
-        });
-    });
-
+    $(".entry_button").click(complete_task);
     $(".entry").draggable(draggable_options);
     $(".entry").droppable(droppable_options);
     $(".date_container").droppable(droppable_options);
