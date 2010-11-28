@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
 
   has_many :entries
+  has_many :recurring_entries
 
   validates :login, :presence => true, :length => {:minimum => 1, :maximum => 20}
 

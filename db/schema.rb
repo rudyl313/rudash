@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101031221329) do
+ActiveRecord::Schema.define(:version => 20101128222101) do
 
   create_table "entries", :force => true do |t|
     t.string   "content"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20101031221329) do
     t.datetime "completed_at"
     t.integer  "user_id"
     t.time     "order_time"
+    t.integer  "recurring_entry_id"
+  end
+
+  create_table "recurring_entries", :force => true do |t|
+    t.string   "period"
+    t.integer  "wday"
+    t.integer  "mday"
+    t.integer  "month"
+    t.time     "due_time"
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
