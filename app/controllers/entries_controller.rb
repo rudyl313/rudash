@@ -10,9 +10,8 @@ class EntriesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    start_date = [Date.today,
-                  Entry.where("completed_at IS NULL").
-                  order(:due_date).first.due_date].min
+    old_entry = Entry.where("completed_at IS NULL").order(:due_date).first
+    start_date = old_entry ? [Date.today,old_entry.due_date].min : Date.today
     @dates = ((start_date)..(start_date + 14.days)).to_a
   end
 
