@@ -12,6 +12,7 @@ class EntriesController < ApplicationController
     @user = User.find(params[:user_id])
     old_entry = Entry.where("completed_at IS NULL").order(:due_date).first
     start_date = old_entry ? [Date.today,old_entry.due_date].min : Date.today
+    Entry.where("due_date < ?",start_date).destroy_all
     @dates = ((start_date)..(start_date + 14.days)).to_a
   end
 
@@ -42,7 +43,9 @@ class EntriesController < ApplicationController
 
   private
   def only_view_own_entries
-    redirect_to(user_entries_path(current_user)) unless (params[:user_id] == current_user.id.to_s)
+    unless (params[:user_id] == current_user.id.to_s)
+      redirect_to(user_entries_path(current_user))
+    end
   end
 
   def handle_order_time
@@ -55,9 +58,9 @@ class EntriesController < ApplicationController
 
   def insert_in_right_position
     if params[:after]
-      params[:entry][:order_time] = Entry.order_time_to_be_after(params[:after],
-                                                                 params[:id],
-                                                                 params[:entry][:due_date])
+      params[:entry][:order_time] =
+        Entry.order_time_to_be_after(params[:after],params[:id],
+                                     params[:entry][:due_date])
     end
   end
 
