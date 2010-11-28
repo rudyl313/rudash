@@ -2,10 +2,9 @@ class RecurringEntry < ActiveRecord::Base
   belongs_to :user
   has_many :entries, :dependent => :destroy
 
-  #validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
-  #validates :wday, :presence => false, :numericality => true
-  #validates :mday, :presence => false, :numericality => true
-  #validates :month, :presence => false, :numericality => true
+  validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
+  validates :wday, :numericality => true
+  validates :mday, :numericality => true
   validates :content, :presence => true, :length =>
     {:minimum => 1, :maximum => 1000}
 
