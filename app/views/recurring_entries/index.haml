@@ -1,1 +1,49 @@
+-content_for :head do
+  = javascript_include_tag "recurring_entries"
+
 %h1="Recurring Events"
+#daily_group
+  .heading_container
+    %h3= "Daily"
+  .recurring_entry_list
+    - @daily.each do |item|
+      .recurring_entry_time
+        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
+      .recurring_entry_content
+        = item.content
+
+#weekly_group
+  .heading_container
+    %h3= "Weekly"
+  .recurring_entry_list
+    - @weekly.each do |item|
+      .recurring_entry_time
+        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
+      .recurring_entry_weekday
+        = week_day(item.wday)
+      .recurring_entry_content
+        = item.content
+
+#monthly_group
+  .heading_container
+    %h3= "Monthly"
+  .recurring_entry_list
+    - @monthly.each do |item|
+      .recurring_entry_time
+        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
+      .recurring_entry_mday
+        = item.mday
+      .recurring_entry_content
+        = item.content
+
+#yearly_group
+  .heading_container
+    %h3= "Yearly"
+  .recurring_entry_list
+    - @yearly.each do |item|
+      .recurring_entry_time
+        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
+      .recurring_entry_due_date
+        = item.mday.due_date
+      .recurring_entry_content
+        = item.content

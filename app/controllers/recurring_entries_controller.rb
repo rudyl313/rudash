@@ -3,6 +3,10 @@ class RecurringEntriesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
+    @daily = @user.recurring_entries.where(:period => "daily")
+    @weekly = @user.recurring_entries.where(:period => "weekly")
+    @monthly = @user.recurring_entries.where(:period => "monthly")
+    @yearly = @user.recurring_entries.where(:period => "yearly")
   end
 
   private
