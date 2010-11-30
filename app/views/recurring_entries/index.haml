@@ -24,6 +24,8 @@
   .recurring_entry_controls{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_weekly",nil,:class => "time_field")
+    = "Day"
+    = select_tag "day_field_weekly", options_for_select(day_options)
     = "Content"
     = text_field_tag("content_field_weekly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_weekly")
@@ -42,6 +44,8 @@
   .recurring_entry_controls{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_monthly",nil,:class => "time_field")
+    = "Day"
+    = select_tag "day_field_monthly", options_for_select((1..31).to_a)
     = "Content"
     = text_field_tag("content_field_monthly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_monthly")
@@ -60,6 +64,9 @@
   .recurring_entry_controls{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_yearly",nil,:class => "time_field")
+    = "Date"
+    = select_tag "day_field_yearly", options_for_select((1..31).to_a)
+    = select_tag "month_field_yearly", options_for_select(month_options)
     = "Content"
     = text_field_tag("content_field_yearly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_yearly")
