@@ -5,6 +5,12 @@
 #daily_group
   .heading_container
     %h3= "Daily"
+  .recurring_entry_controls{:style => "display:none;"}
+    = "Time"
+    = text_field_tag("time_field_daily",nil,:class => "time_field")
+    = "Content"
+    = text_field_tag("content_field_daily",nil,:class => "content_field")
+    = submit_tag("Add", :class => "submit_new_daily")
   .recurring_entry_list
     - @daily.each do |item|
       .recurring_entry_time
@@ -15,6 +21,12 @@
 #weekly_group
   .heading_container
     %h3= "Weekly"
+  .recurring_entry_controls{:style => "display:none;"}
+    = "Time"
+    = text_field_tag("time_field_weekly",nil,:class => "time_field")
+    = "Content"
+    = text_field_tag("content_field_weekly",nil,:class => "content_field")
+    = submit_tag("Add", :class => "submit_new_weekly")
   .recurring_entry_list
     - @weekly.each do |item|
       .recurring_entry_time
@@ -27,6 +39,12 @@
 #monthly_group
   .heading_container
     %h3= "Monthly"
+  .recurring_entry_controls{:style => "display:none;"}
+    = "Time"
+    = text_field_tag("time_field_monthly",nil,:class => "time_field")
+    = "Content"
+    = text_field_tag("content_field_monthly",nil,:class => "content_field")
+    = submit_tag("Add", :class => "submit_new_monthly")
   .recurring_entry_list
     - @monthly.each do |item|
       .recurring_entry_time
@@ -39,6 +57,12 @@
 #yearly_group
   .heading_container
     %h3= "Yearly"
+  .recurring_entry_controls{:style => "display:none;"}
+    = "Time"
+    = text_field_tag("time_field_yearly",nil,:class => "time_field")
+    = "Content"
+    = text_field_tag("content_field_yearly",nil,:class => "content_field")
+    = submit_tag("Add", :class => "submit_new_yearly")
   .recurring_entry_list
     - @yearly.each do |item|
       .recurring_entry_time
