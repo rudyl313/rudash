@@ -5,6 +5,7 @@ class RecurringEntry < ActiveRecord::Base
   validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
   validates :wday, :numericality => true
   validates :mday, :numericality => true
+  validates :month, :numericality => true
   validates :content, :presence => true, :length =>
     {:minimum => 1, :maximum => 1000}
 
@@ -16,7 +17,8 @@ class RecurringEntry < ActiveRecord::Base
     where(:period => "monthly", :mday => dates.map(&:mday).uniq.sort!)
   }
   scope :yearly, lambda {|dates|
-    where(:period => "yearly", :due_date => dates)
+    where(:period => "yearly", :mday => dates.map(&:mday),
+          :month => dates.map(&:month))
   }
   scope :for_user, lambda{|user|
     where(:user_id => user.id)
@@ -43,7 +45,8 @@ class RecurringEntry < ActiveRecord::Base
     end
 
     self.yearly(dates).for_user(user).each do |rentry|
-      dates.select{|d| rentry.due_date == d}.each do |date|
+      dates.select{|d| d.mday == rentry.mday &&
+        d.month == rentry.month}.each do |date|
         update_entry(rentry,date)
       end
     end
