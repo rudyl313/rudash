@@ -3,9 +3,6 @@ class RecurringEntry < ActiveRecord::Base
   has_many :entries, :dependent => :destroy
 
   validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
-  validates :wday, :numericality => true
-  validates :mday, :numericality => true
-  validates :month, :numericality => true
   validates :content, :presence => true, :length =>
     {:minimum => 1, :maximum => 1000}
 
