@@ -12,11 +12,7 @@
     = text_field_tag("content_field_daily",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_daily")
   .recurring_entry_list
-    - @daily.each do |item|
-      .recurring_entry_time
-        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
-      .recurring_entry_content
-        = item.content
+    = render :partial => "daily_list", :locals => {:daily => @daily}
 
 #weekly_group
   .heading_container
@@ -30,13 +26,7 @@
     = text_field_tag("content_field_weekly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_weekly")
   .recurring_entry_list
-    - @weekly.each do |item|
-      .recurring_entry_time
-        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
-      .recurring_entry_weekday
-        = week_day(item.wday)
-      .recurring_entry_content
-        = item.content
+    = render :partial => "weekly_list", :locals => {:weekly => @weekly}
 
 #monthly_group
   .heading_container
@@ -50,13 +40,7 @@
     = text_field_tag("content_field_monthly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_monthly")
   .recurring_entry_list
-    - @monthly.each do |item|
-      .recurring_entry_time
-        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
-      .recurring_entry_mday
-        = item.mday
-      .recurring_entry_content
-        = item.content
+    = render :partial => "monthly_list", :locals => {:monthly => @monthly}
 
 #yearly_group
   .heading_container
@@ -71,14 +55,6 @@
     = text_field_tag("content_field_yearly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_yearly")
   .recurring_entry_list
-    - @yearly.each do |item|
-      .recurring_entry_time
-        != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
-      .recurring_entry_mday
-        = item.mday
-      .recurring_entry_month
-        = item.month
-      .recurring_entry_content
-        = item.content
+    = render :partial => "yearly_list", :locals => {:yearly => @yearly}
 
 #helper{:style => "display:none", :"data-create-path" => user_recurring_entries_path(@user)}

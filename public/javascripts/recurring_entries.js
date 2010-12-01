@@ -27,7 +27,7 @@
         content : content
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
-        alert("success");
+        $(".recurring_entry_list",$("#daily_group")).html(data);
       });
     });
 
@@ -42,7 +42,7 @@
         wday : day
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
-        alert("success");
+        $(".recurring_entry_list",$("#weekly_group")).html(data);
       });
     });
 
@@ -57,7 +57,7 @@
         mday : day
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
-        alert("success");
+        $(".recurring_entry_list",$("#monthly_group")).html(data);
       });
     });
 
@@ -74,7 +74,7 @@
         month : month
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
-        alert("success");
+        $(".recurring_entry_list",$("#yearly_group")).html(data);
       });
     });
 

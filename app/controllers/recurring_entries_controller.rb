@@ -15,6 +15,8 @@ class RecurringEntriesController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
+    @rentry = RecurringEntry.find(params[:id])
   end
 
   def create

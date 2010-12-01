@@ -1,0 +1,7 @@
+- weekly.each do |item|
+  .recurring_entry_time
+    != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
+  .recurring_entry_weekday
+    = week_day(item.wday)
+  .recurring_entry_content
+    = item.content

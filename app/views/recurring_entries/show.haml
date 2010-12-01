@@ -1,0 +1,1 @@
+= render :partial => @rentry.period + "_list", :locals => {@rentry.period.to_sym => RecurringEntry.where(:user_id => @user.id, :period => @rentry.period)}
