@@ -57,4 +57,4 @@
   .recurring_entry_list
     = render :partial => "yearly_list", :locals => {:yearly => @yearly}
 
-#helper{:style => "display:none", :"data-create-path" => user_recurring_entries_path(@user)}
+#helper{:style => "display:none", :"data-create-path" => user_recurring_entries_path(@user), :"data-user-id" => @user.id}

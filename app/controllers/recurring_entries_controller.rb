@@ -26,6 +26,13 @@ class RecurringEntriesController < ApplicationController
     respond_with(user,@rentry)
   end
 
+  def destroy
+    @user = User.find(params[:user_id])
+    @rentry = RecurringEntry.find(params[:id])
+    @rentry.destroy
+    respond_with(@user,@rentry)
+  end
+
   private
   def only_view_own_entries
     unless (params[:user_id] == current_user.id.to_s)

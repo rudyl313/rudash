@@ -78,5 +78,19 @@
       });
     });
 
+    $(".destroy_rentry").click(function(){
+      var $this = $(this);
+      var id = $this.attr("data-id");
+      var user_id = $("#helper").attr("data-user-id");
+      $.ajax({
+        url : "/users/" + user_id + "/recurring_entries/" + id,
+        type : 'DELETE',
+        data : {
+          recurring_entry : { id : id}
+        },
+        success : function(x,y,data){ $this.parent().remove();  }
+      });
+    });
+
   });
 })(jQuery);
