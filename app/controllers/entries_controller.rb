@@ -12,9 +12,9 @@ class EntriesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    old_entry = Entry.where("completed_at IS NULL").order(:due_date).first
+    old_entry = @user.entries.where("completed_at IS NULL").order(:due_date).first
     start_date = old_entry ? [Date.today,old_entry.due_date].min : Date.today
-    Entry.where("due_date < ?",start_date).destroy_all
+    @user.entries.where("due_date < ?",start_date).destroy_all
     num_days = params[:num_days] ? params[:num_days].to_i : DAYS_INCREMENT
     @dates = ((start_date)..(start_date + num_days.days)).to_a
     RecurringEntry.generate_entries(@dates,@user)
