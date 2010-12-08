@@ -19,6 +19,10 @@ body {
     padding: 0px 0px 0px 8px;
 }
 
+.entry_button {
+    cursor: pointer;
+}
+
 .date_container, .heading_container {
     height: 23px;
     background-color: #AFCBEA;
@@ -26,6 +30,7 @@ body {
     border-radius: 6px;
     padding: 0px 0px 0px 8px;
     margin: 0px 0px 0px 0px;
+    cursor: pointer;
 }
 
 .entry_time, .recurring_entry_list {
@@ -38,4 +43,10 @@ input.time_field {
 
 input.content_field {
     width: 300px;
+}
+
+.more_button {
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
 }
