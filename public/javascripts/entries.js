@@ -72,8 +72,9 @@
     };
 
     $(".date_container").click(function(){
-      $(".entry_controls").slideUp();
-      $(".entry_controls",$(this).parent()).slideDown();
+      var $parent = $(this).parent();
+      $(".entry_controls").not($(".entry_controls",$parent)).slideUp();
+      $(".entry_controls",$parent).slideToggle();
     });
 
     $(".submit_new_entry").click(function(e){
