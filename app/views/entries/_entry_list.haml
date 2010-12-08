@@ -1,4 +1,4 @@
 - Entry.where("due_date = ? AND user_id = ? AND completed_at IS NULL",date,user).order("order_time").each do |entry|
-  .entry{:"data-id" => entry.id,
+  .entry.span-24{:"data-id" => entry.id,
     :"data-update-path" => user_entry_path(user,entry)}
     = render :partial => "entry", :locals => {:entry => entry}

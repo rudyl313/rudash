@@ -5,18 +5,18 @@
 %h1="To Do List"
 - @dates.each do |date|
   - datestr = date.strftime("%d-%m-%Y")
-  .date_group{:"data-date" => datestr}
-    .date_container
+  .date_group.span-24{:"data-date" => datestr}
+    .date_container.span-24
       %h3= date_label(date)
-    .entry_controls{:style => "display:none;"}
+    .entry_controls.span-24{:style => "display:none;"}
       = "Time"
       = text_field_tag("time_field_#{datestr}",nil,:class => "time_field")
       = "Content"
       = text_field_tag("content_field_#{datestr}",nil,:class => "content_field")
       = submit_tag("Add", :class => "submit_new_entry",
         :"data-path" => user_entries_path(@user))
-    .entry_list
+    .entry_list.span-24
       = render :partial => "entry_list", :locals => {:date => date,:user => @user}
 %br/
-.more_button{:"data-link" => user_entries_path(@user,:num_days => @more_days)}
+.more_button.span-24{:"data-link" => user_entries_path(@user,:num_days => @more_days)}
   = "More"
