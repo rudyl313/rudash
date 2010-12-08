@@ -2,22 +2,22 @@
   = javascript_include_tag "recurring_entries"
 
 %h1="Recurring Events"
-#daily_group
-  .heading_container
+#daily_group.span-24
+  .heading_container.span-24
     %h3= "Daily"
-  .recurring_entry_controls{:style => "display:none;"}
+  .recurring_entry_controls.span-24{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_daily",nil,:class => "time_field")
     = "Content"
     = text_field_tag("content_field_daily",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_daily")
-  .recurring_entry_list
+  .recurring_entry_list.span-24
     = render :partial => "daily_list", :locals => {:daily => @daily}
 
 #weekly_group
-  .heading_container
+  .heading_container.span-24
     %h3= "Weekly"
-  .recurring_entry_controls{:style => "display:none;"}
+  .recurring_entry_controls.span-24{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_weekly",nil,:class => "time_field")
     = "Day"
@@ -25,13 +25,13 @@
     = "Content"
     = text_field_tag("content_field_weekly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_weekly")
-  .recurring_entry_list
+  .recurring_entry_list.span-24
     = render :partial => "weekly_list", :locals => {:weekly => @weekly}
 
 #monthly_group
-  .heading_container
+  .heading_container.span-24
     %h3= "Monthly"
-  .recurring_entry_controls{:style => "display:none;"}
+  .recurring_entry_controls.span-24{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_monthly",nil,:class => "time_field")
     = "Day"
@@ -39,13 +39,13 @@
     = "Content"
     = text_field_tag("content_field_monthly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_monthly")
-  .recurring_entry_list
+  .recurring_entry_list.span-24
     = render :partial => "monthly_list", :locals => {:monthly => @monthly}
 
 #yearly_group
-  .heading_container
+  .heading_container.span-24
     %h3= "Yearly"
-  .recurring_entry_controls{:style => "display:none;"}
+  .recurring_entry_controls.span-24{:style => "display:none;"}
     = "Time"
     = text_field_tag("time_field_yearly",nil,:class => "time_field")
     = "Date"
@@ -54,7 +54,7 @@
     = "Content"
     = text_field_tag("content_field_yearly",nil,:class => "content_field")
     = submit_tag("Add", :class => "submit_new_yearly")
-  .recurring_entry_list
+  .recurring_entry_list.span-24
     = render :partial => "yearly_list", :locals => {:yearly => @yearly}
 
 #helper{:style => "display:none", :"data-create-path" => user_recurring_entries_path(@user), :"data-user-id" => @user.id}

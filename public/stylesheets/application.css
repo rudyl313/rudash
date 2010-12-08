@@ -1,16 +1,41 @@
-#page {
-    margin-top: 20px;
+body {
+    background-color: #F0F0F0;
 }
 
-.date_container {
-    height: 25px;
+#page {
+    margin-top: 20px;
+    background-color: #FFF;
+    padding: 20px 30px 20px 20px;
+    -moz-box-shadow: 3px 3px 4px #777;
+    -webkit-box-shadow: 3px 3px 4px #777;
+    box-shadow: 3px 3px 4px #777;
+}
+
+.date_group {
+    margin: 0px 0px 4px 0px;
+}
+
+.entry_controls, .recurring_entry_controls {
+    padding: 0px 0px 0px 8px;
+}
+
+.date_container, .heading_container {
+    height: 23px;
     background-color: #AFCBEA;
     -moz-border-radius: 6px;
     border-radius: 6px;
     padding: 0px 0px 0px 8px;
-    margin: 0px 0px 2px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
-.entry_time {
+.entry_time, .recurring_entry_list {
     margin: 0px 0px 0px 8px;
+}
+
+input.time_field {
+    width: 50px;
+}
+
+input.content_field {
+    width: 300px;
 }
