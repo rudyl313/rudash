@@ -11,6 +11,10 @@ body {
     box-shadow: 3px 3px 4px #777;
 }
 
+.main_heading {
+    padding: 15px 0px 0px 0px;
+}
+
 .date_group {
     margin: 0px 0px 15px 0px;
 }

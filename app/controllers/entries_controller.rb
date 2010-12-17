@@ -42,8 +42,19 @@ class EntriesController < ApplicationController
   def update
     user = User.find(params[:user_id])
     @entry = Entry.find(params[:id])
-    @entry.update_attributes(params[:entry])
-    respond_with(user,@entry)
+    if @entry.recurring_entry && params[:entry][:due_date].to_date != @entry.due_date.to_date
+      new_entry = @entry.clone
+      new_entry.recurring_entry = nil
+      new_entry.save!
+      new_entry.update_attributes(params[:entry])
+      @entry.completed_at = Time.now
+      @entry.save!
+      respond_with(user,new_entry)
+    else
+      @entry.update_attributes(params[:entry])
+      respond_with(user,@entry)
+    end
+
   end
 
   private
