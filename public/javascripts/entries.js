@@ -23,10 +23,10 @@
       refreshPositions: true,
       zIndex: 10000,
       start : function(e,ui){
-        $(this).css("color", "#FFB300");
+        $(this).addClass('dragging_entry');
       },
       stop : function(e,ui){
-        $(this).css("color","black");
+        $(this).removeClass('dragging_entry');
       }
     };
 
