@@ -41,6 +41,11 @@ body {
     margin: 0px 0px 0px 8px;
 }
 
+.entry {
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
 input.time_field {
     width: 50px;
 }
@@ -57,6 +62,8 @@ input.content_field {
 
 .dragging_entry {
     background-color: rgba(229,236,249,0.5);
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+}
+
+.drop_hover {
+    margin-left: 5px;
 }

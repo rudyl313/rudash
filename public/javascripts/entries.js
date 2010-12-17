@@ -31,6 +31,7 @@
     };
 
     var droppable_options = {
+      hoverClass : "drop_hover",
       drop : function(e,ui) {
         if ($(this).hasClass("entry")) {
           var $dropped_group = $(this).parent().parent();
