@@ -42,7 +42,8 @@ class EntriesController < ApplicationController
   def update
     user = User.find(params[:user_id])
     @entry = Entry.find(params[:id])
-    if @entry.recurring_entry && params[:entry][:due_date].to_date != @entry.due_date.to_date
+    if @entry.recurring_entry && params[:entry][:due_date] &&
+        params[:entry][:due_date].to_date != @entry.due_date.to_date
       new_entry = @entry.clone
       new_entry.recurring_entry = nil
       new_entry.save!
