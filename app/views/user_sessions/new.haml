@@ -1,15 +1,18 @@
-%h1 Login
-= form_for @user_session, :url => {:action => "create"} do |f|
-  - unless @user_session.errors.empty?
+.login_form
+  %h1 Login
+  = form_for @user_session, :url => {:action => "create"} do |f|
+    - unless @user_session.errors.empty?
+      %div
+        %ul
+          - @user_session.errors.to_a.each do |error|
+            %li=error
     %div
-      %ul
-      - @user_session.errors.to_a.each do |error|
-        %li=error
-  %div
-    = f.label :login
-    = f.text_field :login
-  %div
-    = f.label :password
-    = f.password_field :password
-  %div
-    = f.submit "Login"
+      = f.label :username
+      %br/
+      = f.text_field :login
+    %div
+      = f.label :password
+      %br/
+      = f.password_field :password
+    %div
+      = f.submit "Login"

@@ -11,6 +11,14 @@ body {
     box-shadow: 3px 3px 4px #777;
 }
 
+.login_form {
+    text-align: center;
+}
+
+.login_form > h1 {
+    margin-bottom: 20px;
+}
+
 .main_heading {
     padding: 15px 0px 0px 0px;
 }
