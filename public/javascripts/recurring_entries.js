@@ -19,6 +19,20 @@
       });
     }
 
+    function destroy_handler() {
+      var $this = $(this);
+      var id = $this.attr("data-id");
+      var user_id = $("#helper").attr("data-user-id");
+      $.ajax({
+        url : "/users/" + user_id + "/recurring_entries/" + id,
+        type : 'DELETE',
+        data : {
+          recurring_entry : { id : id}
+        },
+        success : function(x,y,data){ $this.parent().remove();  }
+      });
+    }
+
     $(".submit_new_daily").click(function(){
       var time = $("#time_field_daily").val();
       var content = $("#content_field_daily").val();
@@ -32,6 +46,7 @@
         $(".recurring_entry_list",$("#daily_group")).slideUp();
         $(".recurring_entry_list",$("#daily_group")).html(data);
         $(".recurring_entry_list",$("#daily_group")).slideDown();
+        $(".destroy_rentry",$("#daily_group")).click(destroy_handler);
       });
     });
 
@@ -50,6 +65,7 @@
         $(".recurring_entry_list",$("#weekly_group")).slideUp();
         $(".recurring_entry_list",$("#weekly_group")).html(data);
         $(".recurring_entry_list",$("#weekly_group")).slideDown();
+        $(".destroy_rentry",$("#weekly_group")).click(destroy_handler);
       });
     });
 
@@ -68,6 +84,7 @@
         $(".recurring_entry_list",$("#monthly_group")).slideUp();
         $(".recurring_entry_list",$("#monthly_group")).html(data);
         $(".recurring_entry_list",$("#monthly_group")).slideDown();
+        $(".destroy_rentry",$("#monthly_group")).click(destroy_handler);
       });
     });
 
@@ -88,22 +105,11 @@
         $(".recurring_entry_list",$("#yearly_group")).slideUp();
         $(".recurring_entry_list",$("#yearly_group")).html(data);
         $(".recurring_entry_list",$("#yearly_group")).slideDown();
+        $(".destroy_rentry",$("#yearly_group")).click(destroy_handler);
       });
     });
 
-    $(".destroy_rentry").click(function(){
-      var $this = $(this);
-      var id = $this.attr("data-id");
-      var user_id = $("#helper").attr("data-user-id");
-      $.ajax({
-        url : "/users/" + user_id + "/recurring_entries/" + id,
-        type : 'DELETE',
-        data : {
-          recurring_entry : { id : id}
-        },
-        success : function(x,y,data){ $this.parent().remove();  }
-      });
-    });
+    $(".destroy_rentry").click(destroy_handler);
 
   });
 })(jQuery);
