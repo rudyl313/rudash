@@ -17,9 +17,9 @@
       - if current_user
         %div#header.span-24.last
           = link_to "Logout", logout_path
-          = link_to "Users", users_path if current_user.users_permission
+          = link_to "Users", users_path unless current_user.users_permission.blank?
           = link_to "Todo", user_entries_path(current_user)
-          - if current_user.recurring_entries_permission
+          - unless current_user.recurring_entries_permission.blank?
             = link_to "Recurring events", user_recurring_entries_path(current_user)
           %div#flash= flash[:notice]
       %div#main.span-24.last

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if current_user
       permission = self.class.to_s.underscore.split("_").first + "_permission"
       if current_user.attributes.map{|k,v| k}.include?(permission)
-        redirect_to root_path unless current_user.attributes[permission]
+        redirect_to root_path if current_user.attributes[permission].blank?
       end
     end
   end
