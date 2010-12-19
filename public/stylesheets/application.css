@@ -41,6 +41,14 @@ body {
     margin: 0px 0px 0px 8px;
 }
 
+.recurring_entry_list > table {
+    padding-right: 8px;
+}
+
+.destroy_rentry {
+    cursor: pointer;
+}
+
 .entry {
     -moz-border-radius: 6px;
     border-radius: 6px;

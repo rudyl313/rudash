@@ -1,9 +1,9 @@
 %table
   - daily.each do |item|
     %tr
-      %td
+      %td.span-1
         != item.due_time ? item.due_time.strftime("%I:%M%p") : "&nbsp;"
       %td
         = item.content
-      %td.destroy_rentry{:"data-id" => item.id}
+      %td.destroy_rentry.span-1{:"data-id" => item.id}
         = "Destroy"
