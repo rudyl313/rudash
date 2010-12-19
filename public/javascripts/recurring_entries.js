@@ -28,7 +28,10 @@
         content : content
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
+        $(".recurring_entry_controls",$("#daily_group")).slideUp();
+        $(".recurring_entry_list",$("#daily_group")).slideUp();
         $(".recurring_entry_list",$("#daily_group")).html(data);
+        $(".recurring_entry_list",$("#daily_group")).slideDown();
       });
     });
 
@@ -43,7 +46,10 @@
         wday : day
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
+        $(".recurring_entry_controls",$("#weekly_group")).slideUp();
+        $(".recurring_entry_list",$("#weekly_group")).slideUp();
         $(".recurring_entry_list",$("#weekly_group")).html(data);
+        $(".recurring_entry_list",$("#weekly_group")).slideDown();
       });
     });
 
@@ -58,7 +64,10 @@
         mday : day
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
+        $(".recurring_entry_controls",$("#monthly_group")).slideUp();
+        $(".recurring_entry_list",$("#monthly_group")).slideUp();
         $(".recurring_entry_list",$("#monthly_group")).html(data);
+        $(".recurring_entry_list",$("#monthly_group")).slideDown();
       });
     });
 
@@ -75,7 +84,10 @@
         month : month
       };
       create_recurring_entry(recurring_entry,function(data,x,y){
+        $(".recurring_entry_controls",$("#yearly_group")).slideUp();
+        $(".recurring_entry_list",$("#yearly_group")).slideUp();
         $(".recurring_entry_list",$("#yearly_group")).html(data);
+        $(".recurring_entry_list",$("#yearly_group")).slideDown();
       });
     });
 
