@@ -2,8 +2,9 @@
   $(function(){
 
     $(".heading_container").click(function(){
-      $(".recurring_entry_controls").slideUp();
-      $(".recurring_entry_controls",$(this).parent()).slideDown();
+      var $parent = $(this).parent();
+      $(".recurring_entry_controls").not($(".recurring_entry_controls",$parent)).slideUp();
+      $(".recurring_entry_controls",$parent).slideToggle();
     });
 
     function create_recurring_entry(rentry,successfn){
