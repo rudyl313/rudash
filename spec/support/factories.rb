@@ -10,3 +10,8 @@ Factory.define :entry do |e|
   e.due_date   Date.today
   e.order_time Time.now
 end
+
+Factory.define :recurring_entry do |r|
+  r.content "splogsplig"
+  r.period  "daily"
+end

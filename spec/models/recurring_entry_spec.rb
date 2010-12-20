@@ -35,6 +35,52 @@ describe RecurringEntry do
       end
       RecurringEntry.new(@valid_attributes.merge(:period => "bloggedly")).should_not be_valid
     end
+  end
+
+  context "scopes" do
+    it "should be able to find all recurring daily recurring entries" do
+      re1 = Factory.create(:recurring_entry,:period => "daily")
+      re2 = Factory.create(:recurring_entry,:period => "weekly")
+      RecurringEntry.daily.should include(re1)
+      RecurringEntry.daily.should_not include(re2)
+    end
+
+    it "should be able to find weekly recurring entries matching a specific date range" do
+      dates = ((Date.today)..(Date.today+2.days)).to_a
+      re1 = Factory.create(:recurring_entry,:period => "weekly", :wday => Date.today.wday)
+      re2 = Factory.create(:recurring_entry,:period => "weekly",
+                           :wday => (Date.today-1.day).wday)
+      RecurringEntry.weekly(dates).should include(re1)
+      RecurringEntry.weekly(dates).should_not include(re2)
+    end
+
+    it "should be able to find monthly recurring entries matching a specific date range" do
+      dates = ((Date.today)..(Date.today+2.days)).to_a
+      re1 = Factory.create(:recurring_entry,:period => "monthly", :mday => Date.today.mday)
+      re2 = Factory.create(:recurring_entry,:period => "monthly",
+                           :mday => (Date.today-1.day).mday)
+      RecurringEntry.monthly(dates).should include(re1)
+      RecurringEntry.monthly(dates).should_not include(re2)
+    end
+
+    it "should be able to find yearly recurring entries matching a specific date range" do
+      dates = ((Date.today)..(Date.today+2.days)).to_a
+      re1 = Factory.create(:recurring_entry,:period => "yearly", :mday => Date.today.mday,
+                           :month => Date.today.month)
+      re2 = Factory.create(:recurring_entry,:period => "yearly",
+                           :mday => (Date.today - 1.day).mday,
+                           :month => (Date.today - 1.day).month)
+      RecurringEntry.yearly(dates).should include(re1)
+      RecurringEntry.yearly(dates).should_not include(re2)
+    end
+
+    it "should be able to find recurring entries for a specific user" do
+      user = Factory.create(:user)
+      re1 = Factory.create(:recurring_entry, :user => user)
+      re2 = Factory.create(:recurring_entry)
+      RecurringEntry.for_user(user).should include(re1)
+      RecurringEntry.for_user(user).should_not include(re2)
+    end
 
   end
 end
