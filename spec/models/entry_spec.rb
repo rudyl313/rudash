@@ -46,7 +46,7 @@ describe Entry do
     timenowstr.should == ordertimestr
   end
 
-  context "finding an order time thats after an entry" do
+  context "finding an order time for an entry" do
     it "should have the order time be the same as the due time if the entry has a due time" do
       time = Time.now
       entry = Factory.create(:entry, :due_time => time)
@@ -54,6 +54,44 @@ describe Entry do
       time = entry.due_time
       order_time = Entry.order_time_to_be_after("blarg",entry.id.to_s,"blerg")
       order_time.should == time
+    end
+
+    context "if placed first" do
+      it "should be given a generated order time if there is no existing entry" do
+        entry = Factory.create(:entry, :due_time => nil)
+        order_time = Entry.generate_order_time
+        result = Entry.order_time_to_be_after("first",entry.id.to_s,(entry.due_date+1.day).to_s)
+        result.should == order_time
+      end
+
+      it "should be 2 minutes before the first existing entry" do
+        time = Time.now
+        entry1 = Factory.create(:entry, :order_time => time)
+        entry2 = Factory.create(:entry, :order_time => time + 5.minutes)
+        entry = Factory.create(:entry, :due_date => entry1.due_date - 1.day)
+        result = Entry.order_time_to_be_after("first",entry.id.to_s,entry1.due_date.to_s)
+        diff = result - (entry1.reload.order_time - 2.minutes)
+        diff.should == 0
+      end
+    end
+
+    context "if placed after an entry" do
+      it "should be 2 minutes after the entry if there is no other entry after them" do
+        time = Time.now
+        entry1 = Factory.create(:entry, :order_time => time)
+        entry = Factory.create(:entry, :due_date => entry1.due_date - 1.day)
+        result = Entry.order_time_to_be_after(entry1.id.to_s,entry.id.to_s,entry1.due_date.to_s)
+        result.should == entry1.reload.order_time + 2.minutes
+      end
+
+      it "should be at the midpoint of the two entries if placed between them" do
+        time = Time.now
+        entry1 = Factory.create(:entry, :order_time => time)
+        entry2 = Factory.create(:entry, :order_time => time + 10.minutes)
+        entry = Factory.create(:entry, :due_date => entry1.due_date - 1.day)
+        result = Entry.order_time_to_be_after(entry1.id.to_s,entry.id.to_s,entry1.due_date.to_s)
+        result.should == entry1.reload.order_time + 5.minutes
+      end
     end
   end
 end
