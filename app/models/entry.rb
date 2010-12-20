@@ -4,6 +4,7 @@ class Entry < ActiveRecord::Base
 
   validates :content, :presence => true, :length => {:minimum => 1, :maximum => 1000}
   validates :due_date, :presence => true
+  validates :order_time, :presence => true
 
   def self.generate_order_time
     Time.now.strftime("%I:%M%p")

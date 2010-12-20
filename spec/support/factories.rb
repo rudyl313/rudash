@@ -4,3 +4,9 @@ Factory.define :user do |u|
   u.password              "mypassword"
   u.password_confirmation "mypassword"
 end
+
+Factory.define :entry do |e|
+  e.content    "entry content"
+  e.due_date   Date.today
+  e.order_time Time.now
+end
