@@ -95,5 +95,45 @@ describe RecurringEntry do
       RecurringEntry.generate_entries(dates,user)
       user.reload.entries.length.should == 2
     end
+
+    it "should generate weekly entries for a date range without duplicating" do
+      dates = [Date.today, Date.today + 1.day]
+      user = Factory.create(:user)
+      Factory.create(:recurring_entry,:period => "weekly", :content => "Weekly",
+                     :user_id => user.id, :wday => Date.today.wday)
+      user.entries.length.should == 0
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+      user.reload.entries.first.due_date.should == Date.today
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+    end
+
+    it "should generate monthly entries for a date range without duplicating" do
+      dates = [Date.today, Date.today + 1.day]
+      user = Factory.create(:user)
+      Factory.create(:recurring_entry,:period => "monthly", :content => "Monthly",
+                     :user_id => user.id, :mday => Date.today.mday)
+      user.entries.length.should == 0
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+      user.reload.entries.first.due_date.should == Date.today
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+    end
+
+    it "should generate yearly entries for a date range without duplicating" do
+      dates = [Date.today, Date.today + 1.day]
+      user = Factory.create(:user)
+      Factory.create(:recurring_entry,:period => "yearly", :content => "Yearly",
+                     :user_id => user.id, :mday => Date.today.mday,
+                     :month => Date.today.month)
+      user.entries.length.should == 0
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+      user.reload.entries.first.due_date.should == Date.today
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 1
+    end
   end
 end
