@@ -30,4 +30,12 @@ describe User do
       end
     end
   end
+
+  it "should be able to return the attributes that end in 'permission'" do
+    user = Factory.create(:user)
+    perms = User.permissions
+    perms.each do |perm|
+      perm[-10..-1].should == "permission"
+    end
+  end
 end
