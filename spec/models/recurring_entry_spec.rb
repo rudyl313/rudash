@@ -81,6 +81,19 @@ describe RecurringEntry do
       RecurringEntry.for_user(user).should include(re1)
       RecurringEntry.for_user(user).should_not include(re2)
     end
+  end
 
+  context "generating entries" do
+    it "should generate daily entries every day without duplicating" do
+      dates = [Date.today, Date.today + 1.day]
+      user = Factory.create(:user)
+      Factory.create(:recurring_entry,:period => "daily", :content => "Daily",
+                     :user_id => user.id)
+      user.entries.length.should == 0
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 2
+      RecurringEntry.generate_entries(dates,user)
+      user.reload.entries.length.should == 2
+    end
   end
 end
