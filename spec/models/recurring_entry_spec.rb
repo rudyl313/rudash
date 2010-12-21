@@ -136,4 +136,25 @@ describe RecurringEntry do
       user.reload.entries.length.should == 1
     end
   end
+
+  context "updating entries" do
+    it "should be able to create a new entry" do
+      user = Factory.create(:user)
+      re = Factory.create(:recurring_entry, :user_id => user.id)
+      RecurringEntry.update_entry(re,Date.today)
+      user.reload.entries.length.should == 1
+      user.reload.entries.first.content.should == re.content
+    end
+
+    it "should be able to update an existing entry" do
+      user = Factory.create(:user)
+      re = Factory.create(:recurring_entry, :user_id => user.id)
+      RecurringEntry.update_entry(re,Date.today)
+      re.content = "New content"
+      re.save!
+      RecurringEntry.update_entry(re,Date.today)
+      user.reload.entries.length.should == 1
+      user.reload.entries.first.content.should == "New content"
+    end
+  end
 end
