@@ -14,6 +14,18 @@
   .recurring_entry_list.span-24
     = render :partial => "daily_list", :locals => {:daily => @daily}
 
+#weekdaily_group
+  .heading_container.span-24
+    %h3= "Weekdaily"
+  .recurring_entry_controls.span-24{:style => "display:none;"}
+    = "Time"
+    = text_field_tag("time_field_weekdaily",nil,:class => "time_field")
+    = "Content"
+    = text_field_tag("content_field_weekdaily",nil,:class => "content_field")
+    = submit_tag("Add", :class => "submit_new_weekdaily")
+  .recurring_entry_list.span-24
+    = render :partial => "weekdaily_list", :locals => {:weekdaily => @weekdaily}
+
 #weekly_group
   .heading_container.span-24
     %h3= "Weekly"

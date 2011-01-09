@@ -2,11 +2,12 @@ class RecurringEntry < ActiveRecord::Base
   belongs_to :user
   has_many :entries, :dependent => :destroy
 
-  validates :period,:presence => true, :inclusion => { :in => ["daily","weekly" ,"monthly","yearly"] }
+  validates :period,:presence => true, :inclusion => { :in => ["daily","weekdaily","weekly" ,"monthly","yearly"] }
   validates :content, :presence => true, :length =>
     {:minimum => 1, :maximum => 1000}
 
   scope :daily, where(:period => "daily")
+  scope :weekdaily, where(:period => "weekdaily")
   scope :weekly, lambda {|dates|
     where(:period => "weekly", :wday => dates.map(&:wday).uniq.sort!)
   }
@@ -25,6 +26,12 @@ class RecurringEntry < ActiveRecord::Base
   def self.generate_entries(dates,user)
     self.daily.for_user(user).each do |rentry|
       dates.each do |date|
+        update_entry(rentry,date)
+      end
+    end
+
+    self.weekdaily.for_user(user).each do |rentry|
+      dates.reject{|date| [0,6].include?(date.wday)}.each do |date|
         update_entry(rentry,date)
       end
     end

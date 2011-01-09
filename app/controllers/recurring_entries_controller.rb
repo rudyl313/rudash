@@ -9,6 +9,7 @@ class RecurringEntriesController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @daily = @user.recurring_entries.where(:period => "daily").order(:due_time)
+    @weekdaily = @user.recurring_entries.where(:period => "weekdaily").order(:due_time)
     @weekly = @user.recurring_entries.where(:period => "weekly").order(:wday).order(:due_time)
     @monthly = @user.recurring_entries.where(:period => "monthly").order(:mday).order(:due_time)
     @yearly = @user.recurring_entries.where(:period => "yearly").order(:month).order(:mday)

@@ -50,6 +50,23 @@
       });
     });
 
+    $(".submit_new_weekdaily").click(function(){
+      var time = $("#time_field_weekdaily").val();
+      var content = $("#content_field_weekdaily").val();
+      var recurring_entry = {
+        period : "weekdaily",
+        due_time : time,
+        content : content
+      };
+      $(".recurring_entry_controls",$("#weekdaily_group")).slideUp();
+      $(".recurring_entry_list",$("#weekdaily_group")).slideUp();
+      create_recurring_entry(recurring_entry,function(data,x,y){
+        $(".recurring_entry_list",$("#weekdaily_group")).html(data);
+        $(".recurring_entry_list",$("#weekdaily_group")).slideDown();
+        $(".destroy_rentry",$("#weekdaily_group")).click(destroy_handler);
+      });
+    });
+
     $(".submit_new_weekly").click(function(){
       var time = $("#time_field_weekly").val();
       var content = $("#content_field_weekly").val();
