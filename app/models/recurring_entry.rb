@@ -62,6 +62,7 @@ class RecurringEntry < ActiveRecord::Base
     entry.content = rentry.content
     entry.due_time = rentry.due_time
     entry.user_id = rentry.user_id
+    entry.order_time = rentry.due_time
     entry.order_time ||= Entry.generate_order_time
     entry.save!
   end
