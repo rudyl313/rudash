@@ -81,12 +81,29 @@
       var $parent = $(this).parent();
       $(".entry_controls").not($(".entry_controls",$parent)).slideUp();
       $(".entry_controls",$parent).slideToggle();
+      $(".content_field", $(this).siblings(".entry_controls")).focus();
     });
 
     $(".time_field, .content_field").keyup(function(e){
+      var $this = $(this);
       if(e.keyCode == 13) {
         $(".submit_new_entry",$(this).parent()).click();
       }
+      if(e.keyCode == 9) {
+        if ($(this).hasClass("content_field")) {
+          $(".time_field",$this.parent()).focus();
+        } else {
+          $(".content_field",$this.parent()).focus();
+        }
+        e.stopPropagation();
+      }
+    });
+
+    $(".time_field, .content_field").keydown(function(e){
+      if(e.keyCode == 9) {
+        return false;
+      }
+      return true;
     });
 
     $(".submit_new_entry").click(function(e){
