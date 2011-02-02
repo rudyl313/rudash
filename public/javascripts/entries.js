@@ -64,6 +64,11 @@
             $dropped_list.slideDown();
             $(".entry",$dropped_list).draggable(draggable_options);
             $(".entry",$dropped_list).droppable(droppable_options);
+            $(".entry",$dropped_list).hover(function(){
+              $(this).addClass('dragging_entry');
+            },function(){
+              $(this).removeClass('dragging_entry');
+            });
             $(".entry_button",$dropped_list).click(complete_task);
             $dragged_item.remove();
             $dragged_list.slideDown();
@@ -98,6 +103,11 @@
           $(".entry_list",$group).html(data);
           $(".entry",$group).draggable(draggable_options);
           $(".entry",$group).droppable(droppable_options);
+          $(".entry",$group).hover(function(){
+            $(this).addClass('dragging_entry');
+          },function(){
+            $(this).removeClass('dragging_entry');
+          });
           $(".entry_button",$group).click(complete_task);
           $(".entry_list",$group).slideDown();
           $("#time_field_" + datestr).val("");
@@ -114,6 +124,11 @@
     $(".entry_button").click(complete_task);
     $(".entry").draggable(draggable_options);
     $(".entry").droppable(droppable_options);
+    $(".entry").hover(function(){
+      $(this).addClass('dragging_entry');
+    },function(){
+      $(this).removeClass('dragging_entry');
+    });
     $(".date_container").droppable(droppable_options);
 
   });
