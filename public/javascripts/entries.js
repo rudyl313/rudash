@@ -83,6 +83,12 @@
       $(".entry_controls",$parent).slideToggle();
     });
 
+    $(".time_field, .content_field").keyup(function(e){
+      if(e.keyCode == 13) {
+        $(".submit_new_entry",$(this).parent()).click();
+      }
+    });
+
     $(".submit_new_entry").click(function(e){
       e.preventDefault();
       var $group = $(this).parent().parent();
