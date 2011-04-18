@@ -16,7 +16,7 @@ Vagrant::Config.run do |config|
   config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
 
   # Configure to provision with local cookbooks
-  config.vm.provisioner = :chef_solo
-  config.chef.run_list = ["recipe[rudash]"]
-  config.chef.json.merge!({:pg => { :user => "rudash", :databases => ["rudash_development"]}})
+  config.vm.provision :chef_solo, :run_list => ["recipe[rudash]"] do |chef|
+    chef.json.merge!({:pg => { :user => "rudash", :databases => ["rudash_development"]}})
+  end
 end
